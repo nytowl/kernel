@@ -147,7 +147,7 @@
 		"bootcmd_SD=run bootargs_base bootargs_SD;load_ntxkernel; bootm\0"   \
 		"bootargs_recovery=setenv bootargs ${bootargs}\0" \
 		"bootcmd_recovery=run bootargs_base bootargs_recovery;load_ntxkernel; bootm\0"   \
-		"bootcmd=run bootcmd_mmc\0" \
+		"bootcmd=i2c probe; run bootcmd_mmc\0" \
 		"KRN_SDNUM_SD=1\0" \
 		"KRN_SDNUM_Recovery=0\0" \
 		"bootdelay=15\0" \
@@ -167,7 +167,7 @@
 		"bootargs_mmc=setenv bootargs ${bootargs} ip=dhcp "     \
 			"root=/dev/mmcblk0p2 rootwait\0"                \
 		"bootcmd_mmc=run bootargs_base bootargs_mmc; bootm\0"   \
-		"bootcmd=run bootcmd_mmc\0"                             \
+		"bootcmd=i2c probe; run bootcmd_mmc\0"                             \
 		"bootdelay=15\0"
 #endif
 
