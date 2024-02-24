@@ -127,7 +127,7 @@
 
 #undef CONFIG_CMD_IMLS
 
-#define CONFIG_BOOTDELAY	1
+#define CONFIG_BOOTDELAY	15
 
 #define CONFIG_PRIME	"FEC0"
 
@@ -137,22 +137,6 @@
 //#define CONFIG_ENV_IS_EMBEDDED
 
 #ifdef CONFIG_MX50_E606XX
-#if 0
-#define	CONFIG_EXTRA_ENV_SETTINGS					\
-		"uboot=u-boot.bin\0"			\
-		"kernel=uImage\0"				\
-		"bootargs_base=setenv bootargs noinitrd console=ttymxc0 rootwait rw no_console_suspend ${bootargs}\0"\
-		"rootdevESD1=/dev/mmcblk1p1\0" \
-		"rootdevESD2=/dev/mmcblk1p2\0" \
-		"rootdevRecovery=/dev/mmcblk0p2\0" \
-		"rootdevNormal=/dev/mmcblk0p1\0" \
-		"rootdev=${rootdevNormal}\0" \
-		"rootfstype=ext3\0" \
-		"bootargs_mmc=setenv bootargs ${bootargs} root=${rootdev} rootfstype=${rootfstype}\0" \
-		"bootcmd_mmc=run bootargs_base bootargs_mmc;load_ntxkernel; bootm\0"   \
-		"bootcmd=run bootcmd_mmc\0" 
-
-#else	
 #define	CONFIG_EXTRA_ENV_SETTINGS					\
 		"uboot=u-boot.bin\0"			\
 		"kernel=uImage\0"				\
@@ -166,10 +150,8 @@
 		"bootcmd=run bootcmd_mmc\0" \
 		"KRN_SDNUM_SD=1\0" \
 		"KRN_SDNUM_Recovery=0\0" \
+		"bootdelay=15\0" \
 		"verify=no" 
-
-#endif
-
 #else
 #define	CONFIG_EXTRA_ENV_SETTINGS					\
 		"netdev=eth0\0"						\
@@ -186,7 +168,7 @@
 			"root=/dev/mmcblk0p2 rootwait\0"                \
 		"bootcmd_mmc=run bootargs_base bootargs_mmc; bootm\0"   \
 		"bootcmd=run bootcmd_mmc\0"                             \
-		
+		"bootdelay=15\0"
 #endif
 
 
@@ -427,3 +409,17 @@
 #define CONFIG_MXC_KPD_COLMAX 4
 #define CONFIG_MXC_KPD_ROWMAX 4
 
+#define CONFIG_USB_DEVICE
+#define CONFIG_IMX_UDC
+
+#define CONFIG_FASTBOOT
+#define CONFIG_FASTBOOT_MANUFACTURER_STR "inkbox-oss"
+#define CONFIG_FASTBOOT_PRODUCT_NAME_STR "InkBox"
+#define CONFIG_FASTBOOT_INTERFACE_STR "InkBox fastboot"
+#define CONFIG_FASTBOOT_SERIAL_NUM 0
+#define CONFIG_FASTBOOT_CONFIGURATION_STR "InkBox fastboot"
+#define CONFIG_FASTBOOT_VENDOR_ID 0x0
+#define CONFIG_FASTBOOT_PRODUCT_ID 0x0
+#define CONFIG_FASTBOOT_BCD_DEVICE 0x0
+#define CONFIG_FASTBOOT_TRANSFER_BUF 0x80000000
+#define CONFIG_FASTBOOT_TRANSFER_BUF_SIZE 0x8000000
